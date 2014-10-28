@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>index</title>
+        <style type="text/css" media="screen">
+            body {
+                margin: 0px;
+                padding: 0px;
+            }
+            #control {
+                width: 100%;
+                height: 100%;
+            }
+            #control .direction {
+                width: 50%;
+                height: 100%;
+                float:left;
+                display:inline-block;
+            }
+            #control .action {
+                width: 50%;
+                height: 100%;
+                display:inline-block;
+            }
+            #control .direction .buttons ,
+            #control .action .buttons {
+                margin: 20%;
+                width: 60%;
+                height: 60%;
+            }
+            #control .direction .buttons .button ,
+            #control .action .buttons .button {
+                width: 33.33%;
+                height: 33.33%;
+                display:inline-block;
+                margin-left:-4px;
+                text-align: center;
+            }
+            #control .direction .buttons .button.forward ,
+            #control .direction .buttons .button.backward ,
+            #control .direction .buttons .button.left ,
+            #control .direction .buttons .button.right {
+                background-color:red;
+            }
+
+            #control .action .buttons .button.stop {
+                background-color:blue;
+            }
+        </style>
+    </head>
+    <body> 
+        <div id="control">
+            <div class="direction">
+                <div class="buttons">
+                    <div class="button"></div>
+                    <div class="button forward" action="forward"></div>
+                    <div class="button"></div>
+                    <div class="button left" action="left"></div>
+                    <div class="button"></div>
+                    <div class="button right" action="right"></div>
+                    <div class="button"></div>
+                    <div class="button backward" action="backward"></div>
+                    <div class="button"></div>
+                </div>
+            </div>
+            <div class="action">
+                <div class="buttons">
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button"></div>
+                    <div class="button stop" action="stop"></div>
+                    <div class="button"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(function() {
+            var controller = new Controller();
+        });
+    </script>
+</html>
