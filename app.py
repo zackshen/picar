@@ -9,8 +9,10 @@ sys.path.append(cur_dir)
 from flask import Flask, jsonify
 from flask import render_template
 from car import car
+from cam import cam
 
 app = Flask(__name__)
+cam.setup()
 
 @app.route('/')
 def index():
