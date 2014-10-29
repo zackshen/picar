@@ -15,13 +15,9 @@ class Cam(object):
         pass
 
     def setup(self):
-        command = [
-            stream_exe,
-            '-i',
-            input_lib,
-            '-o',
-            '%s -w %s' % (output_lib, web_dir)
-        ]
-        subprocess.Popen(command, shell=True)
+        env = os.environ
+        env['LD_LIBRARY_PATH'] = stream_dir
+        command = "./camstream/mjpg_streamer -i './camstream/input_uvc.so' -o './camstream/output_http.so -w ./camstream/www'"
+        subprocess.Popen(command, shell=True, env=env)
 
 cam = Cam()

@@ -110,8 +110,8 @@
     <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script type="text/javascript" charset="utf-8">
         $(function() {
-            var host = window.location.host;
-            $('#camstream').attr('src', 'http://'+host+'?action=stream')
+            var host = window.location.hostname;
+            $('#camstream').attr('src', 'http://'+host+':8080?action=stream')
             var controller = new Controller();
             controller.init();
         });
