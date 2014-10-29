@@ -1,8 +1,7 @@
 (function(env) {
 
-    var Controller = function() {
-        var _this = this;
-        this.$buttons = $('.button');
+    var Car = function() {
+        this.$buttons = $('.direction .button');
         this.$buttons.bind('mousedown', function(e) {
             var $btn = $(this);
             var action = $btn.attr('action');
@@ -18,7 +17,6 @@
                     break;
                 case "right":
                     _this.right();
-                    break;
             }
         });
         this.$buttons.bind('mouseup', function(e) {
@@ -39,13 +37,8 @@
                     break;
             }
         });
-    }
-
-    Controller.prototype = {
-
-        init: function() {
-            this._doAction('blink');
-        },
+    };
+    Car.prototype = {
         forward: function() {
             this._doAction('forward');
         },
@@ -74,6 +67,69 @@
                 }
             });
         }
+    };
+
+    var Cam = function() {
+        var _this = this;
+        this.$buttons = $('.action .button');
+        this.$buttons.bind('mousedown', function(e) {
+            var $btn = $(this);
+            var action = $btn.attr('action');
+            switch(action) {
+                case "camup":
+                    _this.up();
+                    break;
+                case "camdown":
+                    _this.down();
+                    break;
+                case "camleft":
+                    _this.left();
+                    break;
+                case "camright":
+                    _this.right();
+            }
+        });
+        this.$buttons.bind('mouseup', function(e) {
+            _this.stop();
+        });
+
+    };
+    Cam.prototype = {
+        up: function() {
+            this._doAction('up');
+        },
+        down: function() {
+            this._doAction('down');
+        },
+        left: function() {
+            this._doAction('left');
+        },
+        right: function() {
+            this._doAction('right');
+        },
+        _doAction: function(action) {
+            $.ajax({
+                'type': 'POST',
+                'url': '/cam/'+action,
+                'dataType': 'JSON',
+                'success': function(result) {
+                    console.log(result);
+                },
+                'error': function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    };
+
+    var Controller = function() {}
+
+    Controller.prototype = {
+
+        init: function() {
+            this.car = new Car();
+            this.cam = new Cam();
+        },
     };
 
     env.Controller = Controller;
