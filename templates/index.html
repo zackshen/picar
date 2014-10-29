@@ -103,13 +103,15 @@
                     <div class="button"></div>
                 </div>
             </div>
-            <img id="camstream" src="http://192.168.1.10:8080?action=stream"/>
+            <img id="camstream" />
         </div>
     </body>
     <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" charset="utf-8" src="{{ url_for('static', filename='js/app.js') }}"></script>
     <script type="text/javascript" charset="utf-8">
         $(function() {
+            var host = window.location.host;
+            $('#camstream').attr('src', 'http://'+host+'?action=stream')
             var controller = new Controller();
             controller.init();
         });
