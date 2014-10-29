@@ -1,6 +1,7 @@
 (function(env) {
 
     var Car = function() {
+        var _this = this;
         this.$buttons = $('.direction .button');
         this.$buttons.bind('mousedown', function(e) {
             var $btn = $(this);
