@@ -1,5 +1,7 @@
 (function(env) {
 
+    var listener = new window.keypress.Listener();
+
     var Car = function() {
         var _this = this;
         this.$buttons = $('.direction .button');
@@ -90,10 +92,6 @@
                     _this.right();
             }
         });
-        this.$buttons.bind('mouseup', function(e) {
-            _this.stop();
-        });
-
     };
     Cam.prototype = {
         up: function() {
@@ -107,6 +105,9 @@
         },
         right: function() {
             this._doAction('right');
+        },
+        stop: function() {
+            this._doAction('stop');
         },
         _doAction: function(action) {
             $.ajax({

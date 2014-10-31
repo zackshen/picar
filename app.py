@@ -12,7 +12,6 @@ from car import car
 from cam import cam
 
 app = Flask(__name__)
-cam.setup()
 
 @app.route('/')
 def index():
@@ -60,14 +59,51 @@ def car_stop():
     except Exception, e:
         return jsonify(**{'ok': False, 'error': str(e)})
 
-@app.route('/car/blink', methods=['POST'])
-def car_blink():
+
+@app.route('/cam/left', methods=['POST'])
+def cam_left():
     try:
-        car.blink()
+        cam.left()
         return jsonify(**{'ok': True})
     except Exception, e:
         return jsonify(**{'ok': False, 'error': str(e)})
 
+@app.route('/cam/right', methods=['POST'])
+def cam_right():
+    try:
+        cam.right()
+        return jsonify(**{'ok': True})
+    except Exception, e:
+        return jsonify(**{'ok': False, 'error': str(e)})
+
+@app.route('/cam/up', methods=['POST'])
+def cam_up():
+    try:
+        cam.up()
+        return jsonify(**{'ok': True})
+    except Exception, e:
+        return jsonify(**{'ok': False, 'error': str(e)})
+
+@app.route('/cam/down', methods=['POST'])
+def cam_down():
+    try:
+        cam.down()
+        return jsonify(**{'ok': True})
+    except Exception, e:
+        return jsonify(**{'ok': False, 'error': str(e)})
+
+@app.route('/cam/stop', methods=['POST'])
+def cam_stop():
+    try:
+        cam.stop()
+        return jsonify(**{'ok': True})
+    except Exception, e:
+        return jsonify(**{'ok': False, 'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8899)
+    import RPi.GPIO as GPIO
+    try:
+        cam.setup()
+        app.run(host='0.0.0.0', port=8899)
+    except:
+        GPIO.cleanup()
