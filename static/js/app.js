@@ -90,6 +90,8 @@
                     break;
                 case "camright":
                     _this.right();
+                case "camneutral":
+                    _this.neutral();
             }
         });
     };
@@ -108,6 +110,9 @@
         },
         stop: function() {
             this._doAction('stop');
+        },
+        neutral: function() {
+            this._doAction('neutral');
         },
         _doAction: function(action) {
             $.ajax({

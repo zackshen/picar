@@ -100,6 +100,15 @@ def cam_stop():
     except Exception, e:
         return jsonify(**{'ok': False, 'error': str(e)})
 
+@app.route('/cam/neutral', methods=['POST'])
+def cam_neutral():
+    try:
+        cam.neutral()
+        return jsonify(**{'ok': True})
+    except Exception, e:
+        return jsonify(**{'ok': False, 'error': str(e)})
+
+
 if __name__ == '__main__':
     import RPi.GPIO as GPIO
     try:

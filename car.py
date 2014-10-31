@@ -40,6 +40,9 @@ class SmartCar(object):
         GPIO.output(OUT_PIN4, True)
 
     def turn_left(self):
+        self._center_left()
+
+    def _left(self):
         import RPi.GPIO as GPIO
         self._init()
         GPIO.output(OUT_PIN1, False)
@@ -47,13 +50,32 @@ class SmartCar(object):
         GPIO.output(OUT_PIN3, True)
         GPIO.output(OUT_PIN4, False)
 
+    def _center_left(self):
+        import RPi.GPIO as GPIO
+        self._init()
+        GPIO.output(OUT_PIN1, False)
+        GPIO.output(OUT_PIN2, True)
+        GPIO.output(OUT_PIN3, True)
+        GPIO.output(OUT_PIN4, False)
+
     def turn_right(self):
+        self._center_right()
+
+    def _right(self):
         import RPi.GPIO as GPIO
         self._init()
         GPIO.output(OUT_PIN1, True)
         GPIO.output(OUT_PIN2, False)
         GPIO.output(OUT_PIN3, False)
         GPIO.output(OUT_PIN4, False)
+
+    def _center_right(self):
+        import RPi.GPIO as GPIO
+        self._init()
+        GPIO.output(OUT_PIN1, True)
+        GPIO.output(OUT_PIN2, False)
+        GPIO.output(OUT_PIN3, False)
+        GPIO.output(OUT_PIN4, True)
 
     def stop(self):
         self._clear()

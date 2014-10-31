@@ -19,6 +19,8 @@ web_dir = os.path.join(stream_dir, 'www')
 2.5ms - 180deg - 12.5%
 '''
 
+ROUND_STEP = 5
+
 GPIO.setmode(GPIO.BCM)
 
 class Servo(object):
@@ -70,7 +72,7 @@ class Servo(object):
 class HServo(Servo):
 
     def left(self):
-        degree = self.cur_deg + 5
+        degree = self.cur_deg + ROUND_STEP
         if degree >= 180:
             degree = 180
         if self.cur_deg == degree:
@@ -78,7 +80,7 @@ class HServo(Servo):
         self.move_to(degree)
 
     def right(self):
-        degree = self.cur_deg - 5
+        degree = self.cur_deg - ROUND_STEP
         if degree <= 0:
             degree = 0
         if self.cur_deg == degree:
@@ -88,7 +90,7 @@ class HServo(Servo):
 class VServo(Servo):
 
     def up(self):
-        degree = self.cur_deg - 5
+        degree = self.cur_deg - ROUND_STEP
         if degree <= 0:
             degree = 0
         if self.cur_deg == degree:
@@ -96,7 +98,7 @@ class VServo(Servo):
         self.move_to(degree)
 
     def down(self):
-        degree = self.cur_deg + 5
+        degree = self.cur_deg + ROUND_STEP
         if degree >= 180:
             degree = 180
         if self.cur_deg == degree:
@@ -106,8 +108,8 @@ class VServo(Servo):
 class Cam(object):
 
     def __init__(self):
-        self.v_servo = VServo(27)
-        self.h_servo = HServo(22)
+        self.v_servo = VServo(6)
+        self.h_servo = HServo(5)
 
     def setup(self):
         env = os.environ
